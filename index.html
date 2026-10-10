@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de experiencias turísticas y sistema de reservaciones simulado en la Riviera Maya.">
+    <title>Explora Riviera Maya | Reservaciones turísticas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="encabezado">
+        <div>
+            <h1>Explora Riviera Maya</h1>
+            <p>Experiencias naturales, culturales y de aventura</p>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="panel" aria-labelledby="titulo-experiencias">
+            <div>
+                <h2 id="titulo-experiencias">Experiencias disponibles</h2>
+                <p id="contador" role="status" aria-live="polite">Cargando experiencias...</p>
+            </div>
+            <div class="controles">
+                <label class="sr-only" for="buscador">Buscar experiencia</label>
+                <input type="search" id="buscador" placeholder="Buscar experiencia..." autocomplete="off">
+                <label class="sr-only" for="precioMaximo">Precio máximo por persona</label>
+                <input type="number" id="precioMaximo" placeholder="Precio máximo $" min="0" step="1" inputmode="numeric">
+                <label class="sr-only" for="ordenarPrecio">Ordenar por precio</label>
+                <select id="ordenarPrecio">
+                    <option value="normal">Orden original</option>
+                    <option value="ascendente">Menor precio</option>
+                    <option value="descendente">Mayor precio</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="filtros" aria-label="Filtrar por categoría">
+            <button type="button" class="activo" data-categoria="todas" aria-pressed="true">Todas</button>
+            <button type="button" data-categoria="naturaleza" aria-pressed="false">Naturaleza</button>
+            <button type="button" data-categoria="cultura" aria-pressed="false">Cultura</button>
+            <button type="button" data-categoria="aventura" aria-pressed="false">Aventura</button>
+            <button type="button" data-categoria="gastronomia" aria-pressed="false">Gastronomía</button>
+            <button type="button" data-categoria="acuaticas" aria-pressed="false">Actividades acuáticas</button>
+        </section>
+
+        <section id="catalogo" class="catalogo" aria-label="Catálogo turístico"></section>
+
+        <section class="resumen" aria-labelledby="titulo-reserva">
+            <div class="resumen-encabezado">
+                <div>
+                    <h2 id="titulo-reserva">Mi reservación</h2>
+                    <p class="nota-reserva">Selecciona una actividad y la cantidad de personas.</p>
+                </div>
+                <button type="button" id="vaciarReservacion" class="btn-vaciar" disabled>Vaciar reservación</button>
+            </div>
+            <div id="listaReservas" aria-live="polite">
+                <p class="vacio">No hay experiencias seleccionadas.</p>
+            </div>
+            <div class="resumen-totales" aria-live="polite">
+                <p>Total de personas: <strong id="totalPersonas">0</strong></p>
+                <p class="total">Total: <strong id="total">$0 MXN</strong></p>
+            </div>
+        </section>
+
+        <p class="aviso-academico">Esta es una reservación de práctica: no se realizan pagos ni se guardan datos al actualizar la página.</p>
+    </main>
+
+    <footer>
+        <p>Proyecto académico de desarrollo front-end</p>
+    </footer>
+
+    <!-- Mensajes visibles dentro de la página: no utilizamos alert(). -->
+    <div id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></div>
+
+    <!-- Confirmación antes de vaciar la reservación. -->
+    <dialog id="confirmarVaciar" aria-labelledby="titulo-confirmacion">
+        <div class="dialogo-contenido">
+            <h2 id="titulo-confirmacion">¿Vaciar la reservación?</h2>
+            <p>Se eliminarán todas las experiencias seleccionadas.</p>
+            <div class="dialogo-acciones">
+                <button type="button" id="cancelarVaciar">Cancelar</button>
+                <button type="button" id="aceptarVaciar" class="btn-peligro">Sí, vaciar</button>
+            </div>
+        </div>
+    </dialog>
+</body>
+</html>
